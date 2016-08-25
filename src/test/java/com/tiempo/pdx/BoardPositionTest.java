@@ -56,6 +56,12 @@ public class BoardPositionTest {
                         A7, B7, C7, E7, F7, G7, H7,
                         E8, E6, F5, G4, H3, C6, B5,
                         A4, C8)},
+
+                new Object[]{D8, asList(D1, D2, D3, D4, D5, D6, D7,
+                        A8, B8, C8, E8, F8, G8, H8,
+                        E7, F6, G5, H4,
+                        C7, B6, A5
+                )},
         };
     }
 }

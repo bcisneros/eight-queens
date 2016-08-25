@@ -68,6 +68,12 @@ public class BoardPositionTest {
                         A1, B1, C1, D1, E1, F1, G1,
                         G2, F3, E4, D5, C6, B7, A8
                 )},
+
+                new Object[]{H8, asList(
+                        H1, H2, H3, H4, H5, H6, H7,
+                        A8, B8, C8, D8, E8, F8, G8,
+                        G7, F6, E5, D4, C3, B2, A1
+                )},
         };
     }
 }

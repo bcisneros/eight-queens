@@ -4,8 +4,7 @@ package com.tiempo.pdx;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.tiempo.pdx.BoardPosition.A1;
-import static com.tiempo.pdx.BoardPosition.A2;
+import static com.tiempo.pdx.BoardPosition.*;
 import static com.tiempo.pdx.ChessPiece.*;
 
 class Board {
@@ -29,6 +28,26 @@ class Board {
         }
         if (position == A1) {
             boardMap.put(A2, RISK);
+            boardMap.put(A3, RISK);
+            boardMap.put(A4, RISK);
+            boardMap.put(A5, RISK);
+            boardMap.put(A6, RISK);
+            boardMap.put(A7, RISK);
+            boardMap.put(A8, RISK);
+            boardMap.put(B1, RISK);
+            boardMap.put(C1, RISK);
+            boardMap.put(D1, RISK);
+            boardMap.put(E1, RISK);
+            boardMap.put(F1, RISK);
+            boardMap.put(G1, RISK);
+            boardMap.put(H1, RISK);
+            boardMap.put(B2, RISK);
+            boardMap.put(C3, RISK);
+            boardMap.put(D4, RISK);
+            boardMap.put(E5, RISK);
+            boardMap.put(F6, RISK);
+            boardMap.put(G7, RISK);
+            boardMap.put(H8, RISK);
         }
         boardMap.put(position, QUEEN);
         placedQueensCounter++;

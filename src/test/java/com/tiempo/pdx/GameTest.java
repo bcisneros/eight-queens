@@ -1,6 +1,9 @@
 package com.tiempo.pdx;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static com.tiempo.pdx.BoardPosition.*;
 import static com.tiempo.pdx.ChessPiece.NONE;
@@ -8,6 +11,7 @@ import static com.tiempo.pdx.ChessPiece.QUEEN;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class GameTest {
 
     private Game game = new Game();
@@ -47,8 +51,37 @@ public class GameTest {
     }
 
     @Test(expected = GameOverException.class)
-    public void should_end_game_when_next_queen_is_placed_in_loosing_position() throws Exception {
-        board.placeAt(A1);
-        board.placeAt(A2);
+    @Parameters(method = "riskPositions")
+    public void should_end_game_when_next_queen_is_placed_in_loosing_position(BoardPosition initialPosition,
+                                                                              BoardPosition riskPosition) throws Exception {
+        board.placeAt(initialPosition);
+        board.placeAt(riskPosition);
+    }
+
+
+    public Object[] riskPositions() {
+        return new Object[]{
+                new Object[]{A1, A2},
+                new Object[]{A1, A3},
+                new Object[]{A1, A4},
+                new Object[]{A1, A5},
+                new Object[]{A1, A5},
+                new Object[]{A1, A7},
+                new Object[]{A1, A8},
+                new Object[]{A1, B1},
+                new Object[]{A1, C1},
+                new Object[]{A1, D1},
+                new Object[]{A1, E1},
+                new Object[]{A1, F1},
+                new Object[]{A1, G1},
+                new Object[]{A1, H1},
+                new Object[]{A1, B2},
+                new Object[]{A1, C3},
+                new Object[]{A1, D4},
+                new Object[]{A1, E5},
+                new Object[]{A1, F6},
+                new Object[]{A1, G7},
+                new Object[]{A1, H8},
+        };
     }
 }

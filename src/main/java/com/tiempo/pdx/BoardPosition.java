@@ -30,14 +30,11 @@ enum BoardPosition {
     private void fourthDiagonal() {
         Integer previous = previousLetterOf();
         if (previous > 0) {
-            System.out.println("Previous" + letters[previous]);
             for (int i = number() + 1; i <= 8 && previous >= 0; ++i) {
                 String name = letters[previous--] + i;
-                System.out.println(name);
                 riskPositions.add(BoardPosition.valueOf(name));
             }
         }
-        System.out.println("Diagonal 4" + riskPositions);
     }
 
     private void thirdDiagonal() {
@@ -45,11 +42,9 @@ enum BoardPosition {
         if (previous >= 0) {
             for (int i = number() - 1; i > 0 && previous >= 0; --i) {
                 String name = letters[previous--] + i;
-                System.out.println(name);
                 riskPositions.add(BoardPosition.valueOf(name));
             }
         }
-        System.out.println("Diagonal 3" + riskPositions);
     }
 
     private void secondDiagonal() {
@@ -57,7 +52,6 @@ enum BoardPosition {
         for (int i = number() - 1; i > 0 && nextLetter < 8; i--) {
             riskPositions.add(BoardPosition.valueOf(letters[nextLetter++] + i));
         }
-        System.out.println("Diagonal 2" + riskPositions);
     }
 
     private void firstDiagonal() {
@@ -65,7 +59,6 @@ enum BoardPosition {
         for (int i = number() + 1; i <= 8 && nextLetter < 8; i++) {
             riskPositions.add(BoardPosition.valueOf(letters[nextLetter++] + i));
         }
-        System.out.println("Diagonal 1" + riskPositions);
     }
 
     private void vertical() {
@@ -93,7 +86,6 @@ enum BoardPosition {
     }
 
     private Integer nextLetterOf() {
-        //String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
         for (int i = 0; i < letters.length; i++) {
             if (letter().equals(letters[i])) {
                 return i + 1;
@@ -103,7 +95,6 @@ enum BoardPosition {
     }
 
     private Integer previousLetterOf() {
-        //String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
         for (int i = 0; i < letters.length; i++) {
             if (letter().equals(letters[i])) {
                 return i - 1;

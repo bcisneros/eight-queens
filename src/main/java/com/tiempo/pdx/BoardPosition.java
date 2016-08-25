@@ -62,7 +62,7 @@ enum BoardPosition {
 
     private void firstDiagonal() {
         Integer nextLetter = nextLetterOf();
-        for (int i = number() + 1; i <= 8; i++) {
+        for (int i = number() + 1; i <= 8 && nextLetter < 8; i++) {
             riskPositions.add(BoardPosition.valueOf(letters[nextLetter++] + i));
         }
         System.out.println("Diagonal 1" + riskPositions);

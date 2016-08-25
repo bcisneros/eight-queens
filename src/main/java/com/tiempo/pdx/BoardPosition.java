@@ -29,9 +29,9 @@ enum BoardPosition {
 
     private void fourthDiagonal() {
         Integer previous = previousLetterOf();
-        if (previous >= 0) {
+        if (previous > 0) {
             System.out.println("Previous" + letters[previous]);
-            for (int i = number() + 1; i < 8 && previous >= 0; i++) {
+            for (int i = number() + 1; i <= 8 && previous >= 0; ++i) {
                 String name = letters[previous--] + i;
                 System.out.println(name);
                 riskPositions.add(BoardPosition.valueOf(name));
@@ -42,8 +42,12 @@ enum BoardPosition {
 
     private void thirdDiagonal() {
         Integer previous = previousLetterOf();
-        for (int i = previous + 1; i > 0; i--) {
-            riskPositions.add(BoardPosition.valueOf(letters[i-1] + (i)));
+        if (previous >= 0) {
+            for (int i = number() - 1; i > 0 && previous >= 0; --i) {
+                String name = letters[previous--] + i;
+                System.out.println(name);
+                riskPositions.add(BoardPosition.valueOf(name));
+            }
         }
         System.out.println("Diagonal 3" + riskPositions);
     }

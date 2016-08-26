@@ -90,6 +90,7 @@ public class BoardPositionTest {
         assertNull(B1.down());
     }
 
+    @SuppressWarnings("unused")
     private Object[] data() {
         return new Object[]{
                 new Object[]{
@@ -158,38 +159,74 @@ public class BoardPositionTest {
                                 C4, B4, A4,
                                 C5, B6, A7
                         )},
-                /*new Object[]{D5, asList(D1, D2, D3, D4, D6, D7, D8,
-                        A5, B5, C5, E5, F5, G5, H5,
-                        E6, F7, G8, E4, F3, G2, H1,
-                        C4, B3, A2, C6, B7, A8)},
-                new Object[]{D6, asList(D1, D2, D3, D4, D5, D7, D8,
-                        A6, B6, C6, E6, F6, G6, H6,
-                        E7, F8, E5, F4, G3, H2, C5,
-                        B4, A3, C7, B8)},
-                new Object[]{D7, asList(D1, D2, D3, D4, D5, D6, D8,
-                        A7, B7, C7, E7, F7, G7, H7,
-                        E8, E6, F5, G4, H3, C6, B5,
-                        A4, C8)},
-                new Object[]{D8, asList(D1, D2, D3, D4, D5, D6, D7,
-                        A8, B8, C8, E8, F8, G8, H8,
-                        E7, F6, G5, H4,
-                        C7, B6, A5
-                )},
-                new Object[]{H1, asList(
-                        H2, H3, H4, H5, H6, H7, H8,
-                        A1, B1, C1, D1, E1, F1, G1,
-                        G2, F3, E4, D5, C6, B7, A8
-                )},
-                new Object[]{H5, asList(
-                        H1, H2, H3, H4, H6, H7, H8,
-                        A5, B5, C5, D5, E5, F5, G5,
-                        G4, F3, E2, D1, G6, F7, E8
-                )},
-                new Object[]{H8, asList(
-                        H1, H2, H3, H4, H5, H6, H7,
-                        A8, B8, C8, D8, E8, F8, G8,
-                        G7, F6, E5, D4, C3, B2, A1
-                )},*/
+                new Object[]{
+                        D5,
+                        asList(
+                                D6, D7, D8,
+                                E6, F7, G8,
+                                E5, F5, G5, H5,
+                                E4, F3, G2, H1,
+                                D4, D3, D2, D1,
+                                C4, B3, A2,
+                                C5, B5, A5,
+                                C6, B7, A8
+                        )},
+                new Object[]{
+                        D6,
+                        asList(
+                                D7, D8,
+                                E7, F8,
+                                E6, F6, G6, H6,
+                                E5, F4, G3, H2,
+                                D5, D4, D3, D2, D1,
+                                C5, B4, A3,
+                                C6, B6, A6,
+                                C7, B8
+                        )},
+                new Object[]{
+                        D7,
+                        asList(
+                                D8,
+                                E8,
+                                E7, F7, G7, H7,
+                                E6, F5, G4, H3,
+                                D6, D5, D4, D3, D2, D1,
+                                C6, B5, A4,
+                                C7, B7, A7,
+                                C8
+                        )},
+                new Object[]{
+                        D8,
+                        asList(
+                                E8, F8, G8, H8,
+                                E7, F6, G5, H4,
+                                D7, D6, D5, D4, D3, D2, D1,
+                                C7, B6, A5,
+                                C8, B8, A8
+                        )},
+                new Object[]{
+                        H1,
+                        asList(
+                                H2, H3, H4, H5, H6, H7, H8,
+                                G1, F1, E1, D1, C1, B1, A1,
+                                G2, F3, E4, D5, C6, B7, A8
+                        )},
+                new Object[]{
+                        H5,
+                        asList(
+                                H6, H7, H8,
+                                H4, H3, H2, H1,
+                                G4, F3, E2, D1,
+                                G5, F5, E5, D5, C5, B5, A5,
+                                G6, F7, E8
+                        )},
+                new Object[]{
+                        H8,
+                        asList(
+                                H7, H6, H5, H4, H3, H2, H1,
+                                G7, F6, E5, D4, C3, B2, A1,
+                                G8, F8, E8, D8, C8, B8, A8
+                        )},
         };
     }
 }

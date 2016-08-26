@@ -4,6 +4,8 @@ package com.tiempo.pdx;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 enum BoardPosition {
     A1, A2, A3, A4, A5, A6, A7, A8,
     B1, B2, B3, B4, B5, B6, B7, B8,
@@ -14,92 +16,175 @@ enum BoardPosition {
     G1, G2, G3, G4, G5, G6, G7, G8,
     H1, H2, H3, H4, H5, H6, H7, H8;
 
-    String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    public static final int LAST_ROW = 8;
+    public static final String FIRST_COLUMN = "A";
+    public static final String LAST_COLUMN = "H";
+    public static final int UP = 1;
+    public static final int DOWN = -1;
+    public static final int RIGHT = 1;
+    public static final int LEFT = -1;
+    public static final int FIRST_ROW = 1;
     List<BoardPosition> riskPositions = new ArrayList<BoardPosition>();
 
     public List<BoardPosition> riskPositions() {
-        horizontal();
-        vertical();
-        firstDiagonal();
-        secondDiagonal();
-        thirdDiagonal();
-        fourthDiagonal();
+        findUpPositions();
+        findRightUpPositions();
+        findRightPositions();
+        findRightDownPositions();
+        findDownPositions();
+        findLeftDownPositions();
+        findLeftPositions();
+        findLeftUpPositions();
         return riskPositions;
     }
 
-    private void fourthDiagonal() {
-        Integer previous = previousLetterOf();
-        if (previous > 0) {
-            for (int i = number() + 1; i <= 8 && previous >= 0; ++i) {
-                String name = letters[previous--] + i;
-                riskPositions.add(BoardPosition.valueOf(name));
-            }
+    private void findLeftUpPositions() {
+        BoardPosition leftUpPosition = leftUp();
+
+        while (leftUpPosition != null) {
+            riskPositions.add(leftUpPosition);
+            leftUpPosition = leftUpPosition.leftUp();
         }
     }
 
-    private void thirdDiagonal() {
-        Integer previous = previousLetterOf();
-        if (previous >= 0) {
-            for (int i = number() - 1; i > 0 && previous >= 0; --i) {
-                String name = letters[previous--] + i;
-                riskPositions.add(BoardPosition.valueOf(name));
-            }
+    private BoardPosition leftUp() {
+        return left() != null ? left().up() : null;
+    }
+
+    private void findLeftPositions() {
+        BoardPosition leftPosition = left();
+        while (leftPosition != null) {
+            riskPositions.add(leftPosition);
+            leftPosition = leftPosition.left();
         }
     }
 
-    private void secondDiagonal() {
-        Integer nextLetter = nextLetterOf();
-        for (int i = number() - 1; i > 0 && nextLetter < 8; i--) {
-            riskPositions.add(BoardPosition.valueOf(letters[nextLetter++] + i));
+    private void findLeftDownPositions() {
+        BoardPosition leftDownPosition = leftDown();
+
+        while (leftDownPosition != null) {
+            riskPositions.add(leftDownPosition);
+            leftDownPosition = leftDownPosition.leftDown();
         }
     }
 
-    private void firstDiagonal() {
-        Integer nextLetter = nextLetterOf();
-        for (int i = number() + 1; i <= 8 && nextLetter < 8; i++) {
-            riskPositions.add(BoardPosition.valueOf(letters[nextLetter++] + i));
+    private BoardPosition leftDown() {
+        return left() != null ? left().down() : null;
+    }
+
+    private void findRightPositions() {
+        BoardPosition rightPosition = right();
+
+        while (rightPosition != null) {
+            riskPositions.add(rightPosition);
+            rightPosition = rightPosition.right();
         }
     }
 
-    private void vertical() {
-        for (String currentLetter : letters) {
-            BoardPosition boardPosition = BoardPosition.valueOf(currentLetter + (Integer) number());
-            if (boardPosition != this)
-                riskPositions.add(boardPosition);
+    private void findDownPositions() {
+        BoardPosition downPosition = down();
+
+        while (downPosition != null) {
+            riskPositions.add(downPosition);
+            downPosition = downPosition.down();
         }
     }
 
-    private int number() {
-        return Integer.parseInt(name().substring(1));
-    }
-
-    private void horizontal() {
-        for (int i = 1; i <= 8; i++) {
-            BoardPosition boardPosition = BoardPosition.valueOf(letter() + i);
-            if (boardPosition != this)
-                riskPositions.add(boardPosition);
+    private void findRightDownPositions() {
+        BoardPosition rightDownPosition = rightDown();
+        while (rightDownPosition != null) {
+            riskPositions.add(rightDownPosition);
+            rightDownPosition = rightDownPosition.rightDown();
         }
     }
 
-    private String letter() {
+    private BoardPosition rightDown() {
+        return right() != null ? right().down() : null;
+    }
+
+    private void findRightUpPositions() {
+        BoardPosition rightUpPosition = rightUp();
+        while (rightUpPosition != null) {
+            riskPositions.add(rightUpPosition);
+            rightUpPosition = rightUpPosition.rightUp();
+        }
+    }
+
+    private BoardPosition rightUp() {
+        return right() != null ? right().up() : null;
+    }
+
+    private void findUpPositions() {
+        BoardPosition upPosition = up();
+        while (upPosition != null) {
+            riskPositions.add(upPosition);
+            upPosition = upPosition.up();
+        }
+    }
+
+    public String column() {
         return name().substring(0, 1);
     }
 
-    private Integer nextLetterOf() {
-        for (int i = 0; i < letters.length; i++) {
-            if (letter().equals(letters[i])) {
-                return i + 1;
-            }
-        }
-        return -1;
+    public int row() {
+        return parseInt(name().substring(1));
     }
 
-    private Integer previousLetterOf() {
-        for (int i = 0; i < letters.length; i++) {
-            if (letter().equals(letters[i])) {
-                return i - 1;
-            }
-        }
-        return -1;
+
+    public BoardPosition right() {
+        return isLastColumn() ?
+                null :
+                horizontalPositionTo(RIGHT);
+    }
+
+    public BoardPosition left() {
+        return isFirstColumn() ?
+                null :
+                horizontalPositionTo(LEFT);
+    }
+
+    private boolean isFirstColumn() {
+        return isColumn(FIRST_COLUMN);
+    }
+
+    private boolean isLastColumn() {
+        return isColumn(LAST_COLUMN);
+    }
+
+    private boolean isColumn(String column) {
+        return column.equals(column());
+    }
+
+    private BoardPosition horizontalPositionTo(int position) {
+        String next = String.valueOf((char) ((int) column().charAt(0) + position));
+        return valueOf(next + row());
+    }
+
+    public BoardPosition up() {
+        return isLastRow() ?
+                null :
+                verticalPositionTo(UP);
+    }
+
+    public BoardPosition down() {
+        return isFirstRow() ?
+                null :
+                verticalPositionTo(DOWN);
+    }
+
+    private BoardPosition verticalPositionTo(int position) {
+        return valueOf(column() + (row() + position));
+    }
+
+    private boolean isLastRow() {
+        return isRow(LAST_ROW);
+    }
+
+    private boolean isFirstRow() {
+        return isRow(FIRST_ROW);
+    }
+
+    private boolean isRow(int i) {
+        return row() == i;
     }
 }
